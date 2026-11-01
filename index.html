@@ -91,7 +91,7 @@
         const id = document.getElementById('certId').value.trim();
         const resultContainer = document.getElementById('resultContainer');
         
-        if (!id) {
+        if (id == "") {
             alert("Please enter a valid ID!");
             return;
         }
