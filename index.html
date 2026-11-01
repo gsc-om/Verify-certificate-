@@ -3,279 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Scaffolding & Certifications - Verification Portal</title>
-    <!-- QRCode.js লাইব্রেরি -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <title>Global Scaffolding & Certifications - Certificate Verification</title>
     <style>
-        :root {
-            --primary-color: #0f172a;
-            --accent-color: #0284c7;
-            --success-color: #10b981;
-            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            --card-bg: #ffffff;
-            --text-main: #334155;
-            --text-muted: #64748b;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-gradient);
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
             margin: 0;
-            padding: 15px;
-            color: var(--text-main);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
-
         .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 550px;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            border-top: 5px solid var(--accent-color);
+            max-width: 500px;
         }
-
-        .header {
+        h2 {
             text-align: center;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 20px;
+            color: #333;
             margin-bottom: 20px;
         }
-
-        .header h2 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #e0f2fe;
-            color: var(--accent-color);
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .profile-container {
-            text-align: center;
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 140px;
-            border: 4px solid #f1f5f9;
-            object-fit: cover;
-            display: block;
-            margin: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .cert-id {
-            margin-top: 10px;
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .info-card {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 5px 15px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .info-row {
+        .search-box {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .info-row:last-child {
-            border-bottom: none;
-        }
-
-        .label {
-            font-weight: 600;
-            width: 45%;
-            color: var(--text-muted);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .value {
-            width: 55%;
-            color: var(--primary-color);
-            font-size: 13px;
-            font-weight: 600;
-            text-align: right;
-            word-break: break-word;
-        }
-
-        .verified-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: #d1fae5;
-            color: #065f46;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
+            gap: 10px;
             margin-bottom: 20px;
         }
-
-        .error {
-            text-align: center;
-            color: #ef4444;
-            font-weight: 600;
-            padding: 30px;
-            font-size: 15px;
-            background: #fef2f2;
-            border-radius: 10px;
-            border: 1px solid #fee2e2;
-        }
-
-        .loading {
-            text-align: center;
-            color: var(--accent-color);
-            padding: 40px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .qr-section {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px dashed #e2e8f0;
-        }
-
-        #qrcode {
-            display: inline-block;
+        input {
+            flex: 1;
             padding: 10px;
-            background: #fff;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
         }
-
-        .qr-text {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 8px;
-            font-weight: 500;
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
         }
-
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 11px;
-            color: var(--text-muted);
-            border-top: 1px solid #f1f5f9;
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
             padding-top: 15px;
+        }
+        .result p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #444;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="container" id="mainContainer">
-    <div class="header">
-        <h2>Global Scaffolding & Certifications</h2>
-        <div class="badge">Official Verification Portal</div>
+<div class="container">
+    <h2>GSC Certificate Verification</h2>
+    <div class="search-box">
+        <input type="text" id="certId" placeholder="Enter Certificate ID...">
+        <button onclick="verifyCertificate()">Verify</button>
     </div>
-
-    <div id="contentArea">
-        <div class="loading">⏳ Fetching Secure Record...</div>
-    </div>
-
-    <div class="footer">
-        &copy; 2026 Global Scaffolding & Certifications. All Rights Reserved.
+    
+    <div id="resultContainer" class="result" style="display: none;">
+        <!-- ডাটা এখানে শো করবে -->
     </div>
 </div>
 
 <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwLd-i3ymbzIJHkxkzsQzSs4P86EhSQgvm3qXDBBL4DmjSb8wh3st1MxQP7u3vm_c/exec";
+    // আপনার নতুন ডিপ্লয়কৃত ব্যাকএন্ড ওয়েব অ্যাপ ইউআরএল
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHvELPnCLnh2n1FPZH0cDpaRfwHpQtdnip3vO9DUQjRwRTKYu-dImhcmIN1LSf8hUh/exec";
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-
-    async function fetchCertificateData() {
-        const container = document.getElementById('contentArea');
-
+    function verifyCertificate() {
+        const id = document.getElementById('certId').value.trim();
+        const resultContainer = document.getElementById('resultContainer');
+        
         if (!id) {
-            container.innerHTML = '<div class="error">❌ Please provide a valid Certificate ID in the link!</div>';
+            alert("Please enter a valid ID!");
             return;
         }
 
-        try {
-            let response = await fetch(`${WEB_APP_URL}?id=${id}`);
-            let data = await response.json();
+        resultContainer.style.display = 'block';
+        resultContainer.innerHTML = "<p style='text-align:center;'>Searching...</p>";
 
-            if (!data.ID) {
-                container.innerHTML = '<div class="error">❌ Invalid ID or Record Not Found in Database!</div>';
-                return;
-            }
-
-            container.innerHTML = `
-                <div class="verified-badge">
-                    <span>🛡️ Verified Authentic Certificate</span>
-                </div>
-
-                <div class="profile-container">
-                    <img id="photo" src="${data['Photo URL'] || 'https://via.placeholder.com/120x140?text=No+Photo'}" alt="Candidate Photo" class="profile-img">
-                    <div class="cert-id">CERT-ID: ${data.ID}</div>
-                </div>
-
-                <div class="info-card">
-                    <div class="info-row"><div class="label">Candidate Name</div><div class="value">${data['NAME'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Type</div><div class="value">${data['Type'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Company Name</div><div class="value">${data['Company Name'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Location</div><div class="value">${data['Location'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Country</div><div class="value">${data['Country'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Certified As</div><div class="value">${data['Certified As'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Iqama / ID No</div><div class="value">${data['Iqama / ID No'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Issue Date</div><div class="value">${data['Issue Date'] || ''}</div></div>
-                    <div class="info-row"><div class="label">Expiry Date</div><div class="value">${data['Expiry Date'] || ''}</div></div>
-                </div>
-
-                <div class="qr-section">
-                    <div id="qrcode"></div>
-                    <div class="qr-text">Scan QR code to verify authenticity instantly</div>
-                </div>
-            `;
-
-            new QRCode(document.getElementById("qrcode"), {
-                text: window.location.href,
-                width: 100,
-                height: 100,
+        fetch(`${SCRIPT_URL}?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.ID) {
+                    let html = `<h3>Certificate Details</h3>`;
+                    for (const key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            html += `<p><strong>${key}:</strong> ${data[key]}</p>`;
+                        }
+                    }
+                    resultContainer.innerHTML = html;
+                } else {
+                    resultContainer.innerHTML = `<p class="error">Certificate not found!</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultContainer.innerHTML = `<p class="error">Failed to fetch data. Please try again.</p>`;
             });
-
-        } catch (error) {
-            container.innerHTML = '<div class="error">⚠️ Failed to connect to database. Please try again later.</div>';
-        }
     }
-
-    fetchCertificateData();
 </script>
 
 </body>
