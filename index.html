@@ -1,31 +1,199 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Scaffolding & Certifications - Verification Portal</title>
-    <!-- QRCode.js লাইব্রেরি যা অটো কিউআর কোড তৈরি করবে -->
+    <!-- QRCode.js লাইব্রেরি -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f7f6; margin: 0; padding: 10px; }
-        .container { max-width: 600px; background: #fff; margin: auto; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .header { text-align: center; border-bottom: 2px solid #004080; padding-bottom: 15px; margin-bottom: 20px; }
-        .logo-img { max-width: 100px; height: auto; margin-bottom: 8px; }
-        .header h2 { margin: 0; color: #004080; font-size: 20px; }
-        .profile-img { width: 120px; height: 140px; border: 1px solid #ccc; object-fit: cover; display: block; margin: auto; border-radius: 4px; }
-        .info-row { display: flex; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-        .label { font-weight: bold; width: 40%; color: #333; font-size: 13px; }
-        .value { width: 60%; color: #555; font-size: 13px; word-break: break-all; }
-        .error { text-align: center; color: red; font-weight: bold; padding: 30px; font-size: 16px; }
-        .loading { text-align: center; color: #004080; padding: 30px; font-size: 16px; font-weight: bold; }
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #0284c7;
+            --success-color: #10b981;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+        }
 
-        /* কিউআর কোড সেকশন */
-        .qr-section { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px dashed #ccc; }
-        #qrcode { display: inline-block; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; }
-        .qr-text { font-size: 12px; color: #666; margin-top: 5px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding: 15px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .footer { text-align: center; margin-top: 20px; font-size: 11px; color: #777; border-top: 1px solid #ddd; padding-top: 10px; }
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: var(--accent-color);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .profile-container {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 140px;
+            border: 4px solid #f1f5f9;
+            object-fit: cover;
+            display: block;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .cert-id {
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 5px 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: 600;
+            width: 45%;
+            color: var(--text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .value {
+            width: 55%;
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 600;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .verified-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            text-align: center;
+            color: #ef4444;
+            font-weight: 600;
+            padding: 30px;
+            font-size: 15px;
+            background: #fef2f2;
+            border-radius: 10px;
+            border: 1px solid #fee2e2;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--accent-color);
+            padding: 40px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .qr-section {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        #qrcode {
+            display: inline-block;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .qr-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 11px;
+            color: var(--text-muted);
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -33,11 +201,11 @@
 <div class="container" id="mainContainer">
     <div class="header">
         <h2>Global Scaffolding & Certifications</h2>
-        <p style="margin: 5px 0 0; font-size: 12px; color: #555;">Certificate Verification Portal</p>
+        <div class="badge">Official Verification Portal</div>
     </div>
 
     <div id="contentArea">
-        <div class="loading">⏳ Loading Certificate Data...</div>
+        <div class="loading">⏳ Fetching Secure Record...</div>
     </div>
 
     <div class="footer">
@@ -46,8 +214,7 @@
 </div>
 
 <script>
-    // নতুন গুগল অ্যাপস স্ক্রিপ্ট ওয়েব অ্যাপ ইউআরএল এখানে বসানো হয়েছে:
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzhOv_zAXYey-WJ64VtL8eY0bYca273OjWE3kohBZaOAvJ2KUGE_UPjr_5SapYraDNr3g/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzhQBqkNzSLXGVplvUOEb2pMbMbHtPkRjzwiU01bmZgk0SPYGqJtjTmJ70jPmgwwXTusA/exec";
 
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
@@ -69,35 +236,38 @@
                 return;
             }
 
-            // ডেটা সফলভাবে পেলে পেজে শো করানোর লেআউট
             container.innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <img id="photo" src="${data['Photo URL'] || 'https://via.placeholder.com/120x140?text=No+Photo'}" alt="Candidate Photo" class="profile-img">
-                    <h3 style="color: #004080; margin-top: 10px; font-size: 16px;">CERT-ID: ${data.ID}</h3>
+                <div class="verified-badge">
+                    <span>🛡️ Verified Authentic Certificate</span>
                 </div>
 
-                <div class="info-row"><div class="label">CANDIDATE NAME</div><div class="value">${data['NAME'] || ''}</div></div>
-                <div class="info-row"><div class="label">TYPE</div><div class="value">${data['Type'] || ''}</div></div>
-                <div class="info-row"><div class="label">COMPANY NAME</div><div class="value">${data['Company Name'] || ''}</div></div>
-                <div class="info-row"><div class="label">LOCATION</div><div class="value">${data['Location'] || ''}</div></div>
-                <div class="info-row"><div class="label">COUNTRY</div><div class="value">${data['Country'] || ''}</div></div>
-                <div class="info-row"><div class="label">CERTIFIED AS</div><div class="value">${data['Certified As'] || ''}</div></div>
-                <div class="info-row"><div class="label">IQAMA / ID NO</div><div class="value">${data['Iqama / ID No'] || ''}</div></div>
-                <div class="info-row"><div class="label">ISSUE DATE</div><div class="value">${data['Issue Date'] || ''}</div></div>
-                <div class="info-row"><div class="label">EXPIRY DATE</div><div class="value">${data['Expiry Date'] || ''}</div></div>
+                <div class="profile-container">
+                    <img id="photo" src="${data['Photo URL'] || 'https://via.placeholder.com/120x140?text=No+Photo'}" alt="Candidate Photo" class="profile-img">
+                    <div class="cert-id">CERT-ID: ${data.ID}</div>
+                </div>
 
-                <!-- অটো কিউআর কোড জেনারেটর সেকশন -->
+                <div class="info-card">
+                    <div class="info-row"><div class="label">Candidate Name</div><div class="value">${data['NAME'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Type</div><div class="value">${data['Type'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Company Name</div><div class="value">${data['Company Name'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Location</div><div class="value">${data['Location'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Country</div><div class="value">${data['Country'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Certified As</div><div class="value">${data['Certified As'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Iqama / ID No</div><div class="value">${data['Iqama / ID No'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Issue Date</div><div class="value">${data['Issue Date'] || ''}</div></div>
+                    <div class="info-row"><div class="label">Expiry Date</div><div class="value">${data['Expiry Date'] || ''}</div></div>
+                </div>
+
                 <div class="qr-section">
                     <div id="qrcode"></div>
-                    <div class="qr-text">Scan this QR to verify this certificate</div>
+                    <div class="qr-text">Scan QR code to verify authenticity instantly</div>
                 </div>
             `;
 
-            // বর্তমান পেজের লিংকের জন্য অটো কিউআর কোড জেনারেট হবে
             new QRCode(document.getElementById("qrcode"), {
                 text: window.location.href,
-                width: 110,
-                height: 110,
+                width: 100,
+                height: 100,
             });
 
         } catch (error) {
