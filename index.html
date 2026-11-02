@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Scaffolding & Certifications - Certificate Verification</title>
-    <!-- Google Fonts & Tailwind CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <style>
         * {
@@ -15,8 +15,8 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #334155;
+            background: linear-gradient(135deg, #090d16 0%, #1e293b 100%);
+            color: #1e293b;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -27,146 +27,172 @@
             background: #ffffff;
             width: 100%;
             max-width: 520px;
-            border-radius: 14px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        /* প্রিমিয়াম হেডার ডিজাইন ও লোগো */
         .header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-            color: white;
-            padding: 20px 15px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 22px 15px;
             text-align: center;
-            border-bottom: 3px solid #3b82f6;
+            border-bottom: 4px solid #3b82f6;
+        }
+        .header-logo {
+            width: 130px;
+            height: auto;
+            margin-bottom: 10px;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
         }
         .header h2 {
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #f8fafc;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .header p {
             font-size: 12px;
-            opacity: 0.9;
+            color: #93c5fd;
+            font-weight: 500;
             margin-top: 4px;
+            letter-spacing: 0.3px;
         }
         .content-body {
-            padding: 20px;
+            padding: 22px;
         }
         .search-box {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            background: #f1f5f9;
-            padding: 10px;
-            border-radius: 10px;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 12px;
             border: 1px solid #cbd5e1;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
         input {
             flex: 1;
-            padding: 10px 14px;
-            border: 1px solid #94a3b8;
-            border-radius: 6px;
+            padding: 12px 14px;
+            border: 1.5px solid #94a3b8;
+            border-radius: 8px;
             font-size: 15px;
             outline: none;
             background: #fff;
+            color: #0f172a;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         input:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
         button {
-            padding: 10px 18px;
-            background-color: #2563eb;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
         button:hover {
-            background-color: #1d4ed8;
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
         }
         .result-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 18px;
             display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
         .profile-section {
             display: flex;
             align-items: center;
             gap: 15px;
             border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 12px;
-            margin-bottom: 12px;
+            padding-bottom: 14px;
+            margin-bottom: 14px;
         }
         .profile-img {
-            width: 80px;
-            height: 100px;
+            width: 85px;
+            height: 105px;
             object-fit: cover;
-            border-radius: 6px;
-            border: 2px solid #ffffff;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            border: 2.5px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
             background: #cbd5e1;
         }
         .profile-basic h3 {
-            font-size: 17px;
+            font-size: 18px;
             color: #0f172a;
-            margin-bottom: 3px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
         .profile-basic p {
-            font-size: 13px;
-            color: #64748b;
-            font-weight: 500;
+            font-size: 13.5px;
+            color: #475569;
+            font-weight: 600;
         }
         .details-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 8px;
+            gap: 10px;
         }
         .detail-row {
             display: flex;
             justify-content: space-between;
-            font-size: 13.5px;
-            padding: 5px 0;
-            border-bottom: 1px dashed #e2e8f0;
+            font-size: 14px;
+            padding: 6px 0;
+            border-bottom: 1px dashed #cbd5e1;
         }
         .detail-label {
-            font-weight: 600;
-            color: #475569;
+            font-weight: 700;
+            color: #334155;
         }
         .detail-value {
-            color: #1e293b;
+            color: #0f172a;
+            font-weight: 600;
             text-align: right;
         }
         .qr-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 15px;
-            padding-top: 12px;
+            margin-top: 18px;
+            padding-top: 14px;
             border-top: 1px solid #e2e8f0;
         }
         #qrcode {
             padding: 8px;
             background: white;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
             margin-top: 6px;
+            border: 1px solid #e2e8f0;
         }
         .error-msg {
             color: #dc2626;
             text-align: center;
-            font-weight: 600;
-            padding: 12px;
-            background: #ffeeec;
-            border-radius: 6px;
+            font-weight: 700;
+            padding: 14px;
+            background: #fee2e2;
+            border-radius: 8px;
+            font-size: 14px;
         }
         .loading {
             text-align: center;
             color: #2563eb;
-            font-weight: 600;
+            font-weight: 700;
             padding: 15px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -174,6 +200,8 @@
 
 <div class="main-container">
     <div class="header">
+        <!-- নতুন লোগো ইমেজ -->
+        <img src="https://i.ibb.co/hP0sMDc/55209.png" alt="GSC Logo" class="header-logo" onerror="this.style.display='none';">
         <h2>Global Scaffolding & Certifications</h2>
         <p>Official Certificate Verification Portal</p>
     </div>
@@ -203,7 +231,7 @@
         }
     };
 
-    // তারিখ থেকে অতিরিক্ত 'T' ও সময় বা জিরো ফরম্যাট বাদ দেওয়ার ফাংশন
+    // তারিখ থেকে অতিরিক্ত সময় বা 'T' বাদ দেওয়ার ফাংশন
     function formatDate(dateString) {
         if (!dateString) return "N/A";
         if (dateString.includes('T')) {
@@ -234,11 +262,11 @@
                     
                     let html = `
                         <div class="profile-section">
-                            <img src="${photoUrl}" alt="Candidate Photo" class="profile-img" onerror="this.src='https://via.placeholder.com/80x100?text=No+Photo'">
+                            <img src="${photoUrl}" alt="Candidate Photo" class="profile-img" onerror="this.src='https://via.placeholder.com/85x105?text=No+Photo'">
                             <div class="profile-basic">
                                 <h3>${name}</h3>
                                 <p>ID: ${certId}</p>
-                                <span style="display:inline-block; margin-top:4px; background:#dcfce7; color:#15803d; padding:2px 6px; font-size:11px; font-weight:600; border-radius:4px;">Verified Valid</span>
+                                <span style="display:inline-block; margin-top:5px; background:#dcfce7; color:#15803d; padding:3px 8px; font-size:11.5px; font-weight:700; border-radius:4px;">Verified Valid</span>
                             </div>
                         </div>
                         <div class="details-grid">
@@ -267,7 +295,7 @@
                     html += `
                         </div>
                         <div class="qr-container">
-                            <span style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Scan to Verify Certificate</span>
+                            <span style="font-size:11.5px; font-weight:700; color:#475569; margin-bottom:5px;">Scan to Verify Certificate</span>
                             <div id="qrcode"></div>
                         </div>
                     `;
@@ -279,8 +307,8 @@
                     let currentUrl = window.location.href.split('?')[0];
                     new QRCode(document.getElementById("qrcode"), {
                         text: currentUrl + "?id=" + certId,
-                        width: 80,
-                        height: 80
+                        width: 85,
+                        height: 85
                     });
 
                 } else {
