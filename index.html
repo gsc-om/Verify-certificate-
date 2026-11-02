@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no">
+    <!-- জুম ইন ও জুম আউট করার সুবিধা সহ ভিউপোর্ট -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Scaffolding & Certifications - Certificate Verification</title>
-    <!-- Google Fonts & Tailwind CSS for Premium Look -->
+    <!-- Google Fonts & Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <style>
@@ -32,24 +33,32 @@
             overflow: hidden;
         }
         .header {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
-            padding: 18px 15px;
+            padding: 15px;
             text-align: center;
+            border-bottom: 3px solid #3b82f6;
+        }
+        /* লোগো স্টাইল */
+        .header-logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 8px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
         .header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
         }
         .header p {
-            font-size: 12px;
+            font-size: 11.5px;
             opacity: 0.9;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         .content-body {
             padding: 20px;
         }
-        /* সার্চ বক্স একদম উপরে এবং আকর্ষণীয় করা হয়েছে */
         .search-box {
             display: flex;
             gap: 10px;
@@ -174,12 +183,13 @@
 
 <div class="main-container">
     <div class="header">
+        <!-- লোগো ইমেজ অ্যাড করা হলো -->
+        <img src="https://i.ibb.co.com/jGqW3x7/logo.jpg" alt="GSC Logo" class="header-logo" onerror="this.style.display='none'">
         <h2>Global Scaffolding & Certifications</h2>
         <p>Official Certificate Verification Portal</p>
     </div>
     
     <div class="content-body">
-        <!-- চার্জ বার বা সার্চ বক্স একদম উপরে ফিক্সড করা হলো -->
         <div class="search-box">
             <input type="text" id="certId" placeholder="Enter Certificate ID...">
             <button onclick="verifyCertificate()">Verify</button>
@@ -194,7 +204,7 @@
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHvELPnCLnh2n1FPZH0cDpaRfwHpQtdnip3vO9DUQjRwRTKYu-dImhcmIN1LSf8hUh/exec";
 
-    // পেজ লোড হওয়ার সময় যদি লিংকে ?id=... থাকে, তবে অটোমেটিক সার্চ করে ডিটেইলস দেখাবে (QR কোডের জন্য)
+    // পেজ লোড হওয়ার সময় লিংকে id থাকলে অটো সার্চ করবে
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const idParam = urlParams.get('id');
@@ -203,6 +213,16 @@
             verifyCertificate();
         }
     };
+
+    // তারিখ থেকে অতিরিক্ত 'T' ও সময় বা জিরো ফরম্যাট বাদ দেওয়ার ফাংশন
+    function formatDate(dateString) {
+        if (!dateString) return "N/A";
+        // যদি ডেট স্ট্রিং-এ 'T' থাকে, তবে 'T'-এর আগের অংশটি (শুধু সাল-মাস-দিন) রিটার্ন করবে
+        if (dateString.includes('T')) {
+            return dateString.split('T')[0];
+        }
+        return dateString;
+    }
 
     function verifyCertificate() {
         const id = document.getElementById('certId').value.trim();
@@ -240,10 +260,17 @@
                         if (data.hasOwnProperty(key)) {
                             let lowerKey = key.toLowerCase();
                             if (lowerKey !== 'id' && lowerKey !== 'name' && lowerKey !== 'photo' && lowerKey !== 'photo url') {
+                                let displayValue = data[key];
+                                
+                                // যদি কি-এর মধ্যে 'date' থাকে, তবে অতিরিক্ত সময় রিমুভ করার ফাংশন এপ্লাই হবে
+                                if (lowerKey.includes('date')) {
+                                    displayValue = formatDate(displayValue);
+                                }
+
                                 html += `
                                     <div class="detail-row">
                                         <span class="detail-label">${key}:</span>
-                                        <span class="detail-value">${data[key]}</span>
+                                        <span class="detail-value">${displayValue}</span>
                                     </div>
                                 `;
                             }
@@ -260,7 +287,7 @@
 
                     resultContainer.innerHTML = html;
 
-                    // নির্দিষ্ট আইডি সহকারে ডাইনামিক QR কোড তৈরি করা, যা স্ক্যান করলে সরাসরি ওই ব্যক্তির ডিটেইলস পেজে নিয়ে যাবে
+                    // ডাইনামিক QR কোড জেনারেট করা
                     document.getElementById("qrcode").innerHTML = "";
                     let currentUrl = window.location.href.split('?')[0];
                     new QRCode(document.getElementById("qrcode"), {
