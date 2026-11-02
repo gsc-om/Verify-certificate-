@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- জুম ইন ও জুম আউট করার সুবিধা সহ ভিউপোর্ট -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Scaffolding & Certifications - Certificate Verification</title>
     <!-- Google Fonts & Tailwind CSS -->
@@ -35,26 +34,18 @@
         .header {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
-            padding: 15px;
+            padding: 20px 15px;
             text-align: center;
             border-bottom: 3px solid #3b82f6;
         }
-        /* লোগো স্টাইল */
-        .header-logo {
-            width: 140px;
-            height: auto;
-            margin-bottom: 8px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
         .header h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
         }
         .header p {
-            font-size: 11.5px;
+            font-size: 12px;
             opacity: 0.9;
-            margin-top: 2px;
+            margin-top: 4px;
         }
         .content-body {
             padding: 20px;
@@ -183,8 +174,6 @@
 
 <div class="main-container">
     <div class="header">
-        <!-- লোগো ইমেজ অ্যাড করা হলো -->
-        <img src="https://i.ibb.co.com/jGqW3x7/logo.jpg" alt="GSC Logo" class="header-logo" onerror="this.style.display='none'">
         <h2>Global Scaffolding & Certifications</h2>
         <p>Official Certificate Verification Portal</p>
     </div>
@@ -217,7 +206,6 @@
     // তারিখ থেকে অতিরিক্ত 'T' ও সময় বা জিরো ফরম্যাট বাদ দেওয়ার ফাংশন
     function formatDate(dateString) {
         if (!dateString) return "N/A";
-        // যদি ডেট স্ট্রিং-এ 'T' থাকে, তবে 'T'-এর আগের অংশটি (শুধু সাল-মাস-দিন) রিটার্ন করবে
         if (dateString.includes('T')) {
             return dateString.split('T')[0];
         }
@@ -262,7 +250,6 @@
                             if (lowerKey !== 'id' && lowerKey !== 'name' && lowerKey !== 'photo' && lowerKey !== 'photo url') {
                                 let displayValue = data[key];
                                 
-                                // যদি কি-এর মধ্যে 'date' থাকে, তবে অতিরিক্ত সময় রিমুভ করার ফাংশন এপ্লাই হবে
                                 if (lowerKey.includes('date')) {
                                     displayValue = formatDate(displayValue);
                                 }
